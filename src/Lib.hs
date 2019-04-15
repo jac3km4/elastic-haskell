@@ -19,7 +19,7 @@ maxAdjacentBy :: Ord a => (a -> Bool) -> [a] -> [[a]]
 maxAdjacentBy pred = fmap (length &&& maximum >>> uncurry replicate) . groupAdjacentBy pred
 
 maxedWidthsPerLine :: [[Int]] -> [[Int]]
-maxedWidthsPerLine textWidths = catMaybes <$> transpose maxedWidthsPerColumn
+maxedWidthsPerLine textWidths = catMaybes . takeWhile isJust <$> transpose maxedWidthsPerColumn
   where
     maxNofCells = maximum $ fmap length textWidths
     maxedWidthsPerColumn =
