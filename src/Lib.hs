@@ -16,7 +16,7 @@ groupAdjacentBy :: (a -> Bool) -> [a] -> [[a]]
 groupAdjacentBy f = groupBy (curry (f *** f >>> uncurry (&&)))
 
 maxAdjacentBy :: Ord a => (a -> Bool) -> [a] -> [[a]]
-maxAdjacentBy = fmap (length &&& maximum >>> uncurry replicate) . groupAdjacentBy
+maxAdjacentBy pred = fmap (length &&& maximum >>> uncurry replicate) . groupAdjacentBy pred
 
 maxedWidthsPerLine :: [[Int]] -> [[Int]]
 maxedWidthsPerLine textWidths = catMaybes <$> transpose maxedWidthsPerColumn
